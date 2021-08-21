@@ -17,26 +17,30 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Stack(
         children: [
-          Center(
-            child: BlocBuilder<GameManager, GameManagerState>(
-              builder: (context, state) {
-                if (state.games.isEmpty) {
-                  return Padding(
-                    padding: EdgeInsets.all(16),
-                    child: NewBoard(
-                      onCreate: (v) => gm.createGame(v),
-                    ),
-                  );
-                } else {
-                  return Padding(
-                    padding: EdgeInsets.all(16),
-                    child: GameBoard(
-                      controller: state.games.first,
-                    ),
-                  );
-                }
-              },
-            ),
+          Column(
+            children: [
+              Expanded(
+                child: BlocBuilder<GameManager, GameManagerState>(
+                  builder: (context, state) {
+                    return ListView.builder(
+                      itemCount: state.games.length + 1,
+                      itemBuilder: (context, i) {
+                        return Padding(
+                          padding: EdgeInsets.all(16),
+                          child: i < state.games.length
+                              ? GameBoard(
+                                  controller: state.games[i],
+                                )
+                              : NewBoard(
+                                  onCreate: (v) => gm.createGame(v),
+                                ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         ],
       ),
