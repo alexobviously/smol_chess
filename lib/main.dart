@@ -30,6 +30,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
           fontFamily: GoogleFonts.indieFlower().fontFamily,
+          //fontFamily: GoogleFonts.balsamiqSans().fontFamily,
+          //fontFamily: GoogleFonts.spartan().fontFamily,
         ),
         home: HomePage(),
       ),

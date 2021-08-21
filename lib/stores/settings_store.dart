@@ -12,15 +12,7 @@ class SettingsStore {
   static SettingsStore _instance = SettingsStore._();
   factory SettingsStore() => _instance;
 
-  GameSettings get gameSettings {
-    GameSettings? gs = box.get(KEY_GAME_SETTINGS);
-    if (gs == null) {
-      gs = GameSettings.standard();
-      box.put(KEY_GAME_SETTINGS, gs);
-    }
-    return gs;
-  }
-
+  GameSettings get gameSettings => box.get(KEY_GAME_SETTINGS, defaultValue: GameSettings.standard());
   set gameSettings(GameSettings gs) {
     box.put(KEY_GAME_SETTINGS, gs);
   }
