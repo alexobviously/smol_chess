@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:smol_chess/game/game_manager.dart';
 import 'package:smol_chess/ui/home_page.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         title: 'smol chess',
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          fontFamily: GoogleFonts.indieFlower().fontFamily,
         ),
         home: HomePage(),
       ),
