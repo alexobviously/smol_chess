@@ -2,10 +2,12 @@ import 'package:bishop/bishop.dart' as bishop;
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:smol_chess/game/game_manager.dart';
 import 'package:squares/squares.dart';
 
 class GameController extends Cubit<GameState> {
-  GameController() : super(GameState.initial());
+  final GameManager manager;
+  GameController({required this.manager}) : super(GameState.initial());
   bishop.Game? game;
   bishop.Engine? engine;
 
@@ -55,10 +57,13 @@ class GameController extends Cubit<GameState> {
     else {
       game!.makeMove(m);
       emitState();
+      manager.submitMove(this, move);
       //Future.delayed(Duration(milliseconds: 200)).then((_) => engineMove());
-      engineMove();
+      //engineMove();
     }
   }
+
+  bool get gameOver => game?.gameOver ?? false;
 
   void randomMove() {
     if (game == null || game!.gameOver) return;
