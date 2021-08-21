@@ -12,6 +12,17 @@ class GameBoard extends StatefulWidget {
 }
 
 class _GameBoardState extends State<GameBoard> {
+  Move? premove;
+
+  void onMove(Move move) {
+    widget.controller.makeMove(move);
+    premove = null;
+  }
+
+  void onPremove(Move move) {
+    premove = move;
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GameController, GameState>(
@@ -25,6 +36,8 @@ class _GameBoardState extends State<GameBoard> {
             theme: BoardTheme.BROWN,
             canMove: state.canMove,
             moves: state.moves,
+            onMove: onMove,
+            onPremove: onPremove,
           ),
         );
       },
