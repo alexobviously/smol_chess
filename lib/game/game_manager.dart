@@ -29,8 +29,10 @@ class GameManager extends Cubit<GameManagerState> {
     if (gc.gameOver) {
       endGame(gc);
     } else {
-      await Future.delayed(Duration(milliseconds: 250));
+      emitState();
+      await Future.delayed(Duration(milliseconds: 850));
       gc.randomMove();
+      emitState();
     }
   }
 
@@ -42,6 +44,10 @@ class GameManager extends Cubit<GameManagerState> {
 
 class GameManagerState {
   final List<GameController> games;
+  List<int> get readyGames =>
+      List.generate(games.length, (i) => i).where((i) => games[i].state.state == PlayState.ourTurn).toList();
+  int get numReady => readyGames.length;
+  int get importantGame => readyGames.isNotEmpty ? readyGames.first : 0;
 
   GameManagerState({required this.games});
   factory GameManagerState.initial() => GameManagerState(games: []);

@@ -21,6 +21,7 @@ dependencies:
   hive: ^2.0.4
   hive_flutter: ^1.1.0
   material_design_icons_flutter: ^5.0.5955-rc.1
+  scrollable_positioned_list: ^0.2.0-nullsafety.0
   squares: ^0.2.3
 
 dev_dependencies:
