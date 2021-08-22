@@ -35,25 +35,28 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   child: BlocBuilder<GameManager, GameManagerState>(
                     builder: (context, state) {
-                      return ScrollablePositionedList.separated(
-                        itemScrollController: itemScrollController,
-                        itemPositionsListener: itemPositionsListener,
-                        itemCount: state.games.length + 1,
-                        itemBuilder: (context, i) {
-                          return Padding(
-                            padding: EdgeInsets.all(16),
-                            child: i < state.games.length
-                                ? GameBoard(
-                                    controller: state.games[i],
-                                  )
-                                : NewBoard(
-                                    onCreate: (v) => gm.createGame(v),
-                                  ),
-                          );
-                        },
-                        separatorBuilder: (context, i) {
-                          return Container(height: 1, color: Colors.grey);
-                        },
+                      return Scrollbar(
+                        thickness: 4,
+                        child: ScrollablePositionedList.separated(
+                          itemScrollController: itemScrollController,
+                          itemPositionsListener: itemPositionsListener,
+                          itemCount: state.games.length + 1,
+                          itemBuilder: (context, i) {
+                            return Padding(
+                              padding: EdgeInsets.all(16),
+                              child: i < state.games.length
+                                  ? GameBoard(
+                                      controller: state.games[i],
+                                    )
+                                  : NewBoard(
+                                      onCreate: (v) => gm.createGame(v),
+                                    ),
+                            );
+                          },
+                          separatorBuilder: (context, i) {
+                            return Container(height: 1, color: Colors.grey);
+                          },
+                        ),
                       );
                     },
                   ),
@@ -65,7 +68,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: BlocBuilder<GameManager, GameManagerState>(
         builder: (context, state) {
-          if (state.numReady > 0) {
+          if (state.numReady > 0 && state.games.length > 1) {
             return FloatingActionButton(
               child: Text(
                 '${state.numReady}',
