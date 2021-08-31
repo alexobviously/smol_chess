@@ -17,7 +17,7 @@ class NewBoard extends StatefulWidget {
 }
 
 class _NewBoardState extends State<NewBoard> {
-  CreatorController controller = CreatorController(bishop.Variant.miniRandom(), SettingsStore().gameSettings);
+  CreatorController controller = CreatorController(SettingsStore().gameSettings);
 
   void setVariant(int v) {
     controller.setVariant(v);
@@ -43,6 +43,8 @@ class _NewBoardState extends State<NewBoard> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    TextTheme textTheme = theme.textTheme;
     return BlocBuilder<CreatorController, CreatorState>(
       bloc: controller,
       builder: (context, state) {
@@ -84,6 +86,7 @@ class _NewBoardState extends State<NewBoard> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Text('new game', style: textTheme.headline5),
                       Text('variant'),
                       ToggleButtons(
                         children: List.generate(variantIcons.length, (i) => Icon(variantIcons[i])).toList(),

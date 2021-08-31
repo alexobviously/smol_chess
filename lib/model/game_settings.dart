@@ -10,7 +10,7 @@ class GameSettings {
   @HiveField(1)
   final int gameTime;
 
-  GameSettings({required this.variant, required this.gameTime});
+  const GameSettings({required this.variant, required this.gameTime});
   factory GameSettings.standard() => GameSettings(variant: Variants.MINI_RANDOM, gameTime: 60);
 
   GameSettings copyWith({

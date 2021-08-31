@@ -6,14 +6,14 @@ import 'package:smol_chess/model/game_settings.dart';
 import 'package:squares/squares.dart';
 
 class CreatorController extends Cubit<CreatorState> {
-  CreatorController(bishop.Variant? variant, this.settings) : super(CreatorState.initial()) {
-    setBoard(variant);
+  CreatorController(this.settings) : super(CreatorState.initial()) {
+    setVariant(settings.variant);
     _resetTimer();
   }
 
   BoardState boardState = BoardState.empty();
   BoardSize size = BoardSize(6, 6);
-  GameSettings settings = GameSettings.standard();
+  GameSettings settings;
   bishop.Variant get variant => Variants.variants[settings.variant] ?? Variants.defaultVariant;
   Timer? timer;
 
@@ -26,14 +26,12 @@ class CreatorController extends Cubit<CreatorState> {
   }
 
   void _resetTimer() {
-    print('reset timer');
     timer?.cancel();
     timer = Timer.periodic(Duration(seconds: 2), (_) => _timerTick());
     print(timer!.isActive);
   }
 
   void _timerTick() {
-    print('timer tick');
     setBoard(variant, 1 - state.boardState.orientation);
   }
 

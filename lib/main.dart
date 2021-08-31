@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'smol chess',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.lightBlue,
           fontFamily: GoogleFonts.indieFlower().fontFamily,
           //fontFamily: GoogleFonts.balsamiqSans().fontFamily,
           //fontFamily: GoogleFonts.spartan().fontFamily,
